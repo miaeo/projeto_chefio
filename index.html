@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- CSS -->
+	<link rel="stylesheet" href="style.css">
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+	<link rel="manifest" href="img/site.webmanifest">
+
+	<title>chef.io</title>
+</head>
+<body>
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+            <i class='bx bx-menu' ></i>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="javascript:void(0);" onclick="showPage('licoes')">
+                    <i class='bx bxs-medal'></i>
+					<span class="text">Lições</span>
+				</a>
+			</li>
+			<li>
+				<a href="javascript:void(0);" onclick="showPage('sobre')">
+                    <i class='bx bx-dish'></i>
+					<span class="text">Sobre nós</span>
+				</a>
+			</li>
+			<li id="admin-link" style="display: none;">
+				<a href="javascript:void(0);" onclick="showPage('admin')">
+					<i class='bx bxs-cog'></i>
+					<span class="text">Administrador</span>
+				</a>
+			</li>
+			<li id="suporte-link">
+				<a href="javascript:void(0);" onclick="showPage('suporte')">
+					<i class='bx bx-support' ></i>
+					<span class="text">Suporte</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+	<!-- CONTENT -->
+	<section id="content">
+
+		<!-- NAVBAR -->
+		<nav>
+			<img src="img/logo_color.png" alt="chef.io" class="logo">
+			
+			<div class="profile">
+				<div class="notificacao-wrapper">
+					<i class='bx bx-bell' id="iconeSino"></i>
+					<div class="notificacao-balao" id="notificacaoBalao">
+					  <button id="fecharNotificacao">×</button>
+					  <i class='bx bxs-bell' style="font-size: 60px;"></i>
+					  <h1><strong>Sem notificações por enquanto!</strong></h1>
+					  <p>Fique ligado! Notificações sobre suas atividades vão aparecer aqui.</p>
+					</div>
+				  </div>
+				<div class="user-info">
+					<i class='bx bxs-user-circle' style="font-size: 40px;"></i>
+					<div class="user-text">
+						<span>Bem-vindo,</span>  
+						<strong id="nomeUsuario">USUÁRIO TESTE</strong>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+
+			<!-- LIÇÕES -->
+			<div id="licoes" class="page active">
+				<div class="content-wrapper">
+					<div class="niveis">
+						<div class="nivel nivel-1">
+							<h2>SEÇÃO <a>1</a></h2>
+							<div class="item" id="item">
+								<img src="img/arroz.jpg" alt="Arroz Branco">
+								<div class="info">
+									<h3>Arroz Branco</h3>
+									<p><i class='bx bx-time-five' style="font-size: 15px;"></i> 20 min</p>
+								</div>
+								<button class="iniciar" data-url="receitas/arroz/arroz.html">INICIAR</button>
+							</div>
+							<div class="item" id="item">
+								<img src="img/ovo.jpg" alt="Ovo Frito">
+								<div class="info">
+									<h3>Ovo Frito</h3>
+									<p><i class='bx bx-time-five' style="font-size: 15px;"></i> 5 min</p>
+								</div>
+								<button class="iniciar" data-url="receitas/ovo/ovo.html">INICIAR</button>
+							</div>
+							<div class="item" id="item">
+								<img src="img/feijao.jpg" alt="Feijão">
+								<div class="info">
+									<h3>Feijão</h3>
+									<p><i class='bx bx-time-five' style="font-size: 15px;"></i> 40 min</p>
+								</div>
+								<button class="iniciar" data-url="receitas/feijao/feijao.html">INICIAR</button>
+							</div>
+						</div>
+				
+						<div class="nivel nivel-2">
+							<h2>SEÇÃO <a>2</a></h2>
+							<div class="item2 bloqueado">
+								<span>?</span>
+								<i class='bx bxs-lock-alt'></i>
+							</div>
+							<div class="item2 bloqueado">
+								<span>?</span>
+								<i class='bx bxs-lock-alt'></i>
+							</div>
+							<div class="item2 bloqueado">
+								<span>?</span>
+								<i class='bx bxs-lock-alt'></i>
+							</div>
+						</div>
+						<div class="nivel nivel-3">
+							<h2>SEÇÃO 3</h2>
+							<div class="item3 bloqueado">
+								<span>?</span>
+								<i class='bx bxs-lock-alt'></i>
+							</div>
+							<div class="item3 bloqueado">
+								<span>?</span>
+								<i class='bx bxs-lock-alt'></i>
+							</div>
+							<div class="item3 bloqueado">
+								<span>?</span>
+								<i class='bx bxs-lock-alt'></i>
+							</div>
+						</div>
+					</div>
+					<!-- CARDS -->
+					<aside class="cards">
+						<div class="ligas-card">
+							<h3>Desbloqueie as ligas!</h3>
+							<p><img class="shield" src="https://d35aaqx5ub95lt.cloudfront.net/images/leagues/d4280fdf64d66de7390fe84802432a53.svg"> 
+								Complete mais 10 receitas pra subir de ranque.</p>
+						</div>
+						<div class="missao-card">
+							<h3>Missão diária</h3>
+							<p><img class="zap" src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/2b5a211d830a24fab92e291d50f65d1d.svg"> 
+								Ganhe 10 XP</p>
+							<div class="progress-bar">
+								<div class="progress">
+									<img class="bau" src="https://d35aaqx5ub95lt.cloudfront.net/images/goals/df7eda7cc1cc833ba30cd1e82781b68f.svg">
+								</div>	
+							</div>
+						</div>
+					</aside>
+					<!-- CARDS -->
+				</div>
+			</div>
+			<!-- LIÇÕES -->
+
+
+			<!-- SOBRE NÓS -->
+			<div id="sobre" class="page">
+				<h1>Quem somos</h2>
+				<div class="tabs-container">
+					<button class="tab-btn active" data-tab="missao">MISSÃO</button>
+					<button class="tab-btn" data-tab="metodo">MÉTODO</button>
+					<div class="tab-indicator"></div>
+				</div>
+			
+				<div class="tab-content active" id="missao">
+					<div style="display: flex; align-items: flex-start; gap: 30px; flex-wrap: wrap;">
+						<div style="flex: 1; min-width: 250px;">
+							<h2>Nossa missão</h2>
+							<p>Queremos democratizar o aprendizado culinário através de
+							uma plataforma gamificada, tornando o aprendizado mais acessível, 
+							divertido e eficiente para todos os públicos.</p>
+							<h3>Educação gratuita e de qualidade</h3>
+							<p>Nosso compromisso é com o acesso. Oferecemos conteúdos gratuitos, 
+							sem barreiras ou cobranças escondidas. Porque aprender a cozinhar deve 
+							ser um direito, não um luxo.</p>
+							<h3>Crescimento além da receita</h3>
+							<p>Ensinar a cozinhar vai além dos ingredientes. Desenvolvemos competências
+							como organização, criatividade e até autonomia e independência — 
+							tudo por meio da prática culinária.</p>
+						</div>
+						<img src="https://d35aaqx5ub95lt.cloudfront.net/vendor/3390675b86eeeab0b4119ccfcb5b186e.svg" style="max-width: 200px; width: 100%; height: auto; flex-shrink: 0; margin-top: 25px;">
+					</div>
+
+					<h3>Aprender com leveza</h3>
+					<p>Cozinhar não precisa ser intimidante. Com lições gamificadas e uma
+						abordagem lúdica, o Chef.io transforma o aprendizado em uma experiência 
+						leve, divertida e envolvente.</p>
+						<div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
+							<img src="https://d35aaqx5ub95lt.cloudfront.net/images/about/approach/da355d86b723c4dd9e868b5d7618cf23.svg" style="max-width: 300px; height: auto; flex-shrink: 0; transform: scale(115%);">
+							<div style="flex: 1; min-width: 250px;">
+							  <h3>Inclusão para todos os gostos</h3>
+							  <p>Seja você uma criança aprendendo a preparar um lanche ou um adulto querendo
+								explorar novos sabores, o Chef.io é feito para todos. Não importa sua idade, 
+								tempo disponível ou experiência na cozinha.</p>
+							</div>
+						</div>
+						
+					<h3>Crescimento além da receita</h3>
+					<p>Ensinar a cozinhar vai além dos ingredientes. Desenvolvemos competências 
+						como organização, criatividade e até autonomia e independência — 
+						tudo por meio da prática culinária.</p>
+				</div>
+			
+				<div class="tab-content" id="metodo">
+					<div style="display: flex; align-items: flex-start; gap: 30px; flex-wrap: wrap;">
+						<img src="https://d35aaqx5ub95lt.cloudfront.net/images/about/fa27866cfc75a55f3a545e14770c8585.svg" style="max-width: 300px; height: auto; flex-shrink: 0; transform: scaleX(-1);">
+						<div style="flex: 1; min-width: 250px;">
+							<h2>Nosso método de ensino</h2>
+							<p>Nós acreditamos que qualquer pessoa pode aprender culinária 
+							com o Chef.io. Nossas lições curtas e práticas são como um jogo, 
+							facilitando o aprendizado com diversão.</p>
+							<p style="margin-top: 5px;">Mas o Chef.io não é só um jogo. É baseado em uma metodologia com 
+							retenção a longo prazo e um currículo alinhado a padrões educacionais. 
+							Vamos explorar como funciona!</p>
+							<h3>Progressão baseada em níveis e conquistas</h3>
+							<p>Nosso sistema de aprendizado é baseado em desafios e recompensas. 
+							O aluno avança por fases, desbloqueia conquistas e sobe de nível, 
+							mantendo a motivação constante.</p>
+						</div>
+					</div>
+
+					<h3>Metodologia com foco em retenção</h3>
+					<p>A estrutura das lições é baseada em técnicas pedagógicas que favorecem
+						a memorização e a repetição espaçada, garantindo que o aprendizado 
+						seja duradouro.</p>
+					
+					<div style="display: flex; align-items: flex-start; gap: 30px; flex-wrap: wrap;">
+						<div style="flex: 1; min-width: 250px;">
+							<h3>Aprendizado aplicado à vida real</h3>
+							<p>No Chef.io, o foco está em ensinar o que realmente importa no cotidiano. 
+								Nada de receitas mirabolantes ou técnicas distantes da realidade da maioria. 
+								Trabalhamos com situações reais da cozinha: desde organizar os ingredientes 
+								para uma refeição rápida até aprender a reaproveitar alimentos e reduzir o desperdício.
+							</p>
+							<p style="margin-top: 5px;">Seja cozinhando para si mesmo, para a família ou iniciando um pequeno negócio, o aprendizado 
+								é direto, funcional e pensado para ser colocado em prática de verdade.</p>
+						</div>
+						<img src="https://d35aaqx5ub95lt.cloudfront.net/images/about/approach/a70b13c26e27f1f0c2f67ccf7cbe2cdf.svg" style="max-width: 300px; height: auto; flex-shrink: 0;">
+					</div>
+					
+					<h3>Adaptação ao ritmo do aluno</h3>
+					<p>Não importa se você quer aprender em 10 minutos ou mergulhar por horas. 
+						O Chef.io permite que cada um siga no seu ritmo, sem pressão.</p>
+				</div>
+			</div>
+			<!-- SOBRE NÓS -->
+			 
+			<!-- SUPORTE -->
+			<div id="suporte" class="page">
+				<div class="suporte-container" class="page">
+					<h1>Como podemos ajudar?</h1>
+					<div class="form-box">
+					<div class="descricao">
+						<h3>Descreva o problema</h3>
+						<p>Conte o que está acontecendo com o máximo de detalhes possível. Isso vai nos ajudar a entender o problema.</p>
+					</div>
+					<form class="formulario">
+						<label for="email">Seu e-mail <a>*</a></label>
+						<input type="email" id="email" required>
+					
+						<label for="assunto">Assunto <a>*</a></label>
+						<input type="text" id="assunto" required>
+					
+						<label for="descricao">Descrição <a>*</a></label>
+						<textarea id="descricao" rows="5" required></textarea>
+					
+						<button type="submit">ENVIAR</button>
+					</form>
+					</div>
+				</div>
+			</div>
+			<!-- SUPORTE -->
+
+			<!-- ADMIN -->
+			<div class="page" id="admin" style="display: none;">
+				<div class="head-title">
+					<div class="left">
+						<h1>Painel do Administrador</h1>
+						<ul class="subtitle">
+							<li>
+								Gerencie os usuários do <b>chef.io</b>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="table-box">
+					<div class="table-header">
+						<div class="filters">
+							<label for="exibir" class="select-label">Exibir: </label>
+							<select id="exibir">
+							  <option value="10" selected>10</option>
+							  <option value="20">20</option>
+							  <option value="30">30</option>
+							</select>
+						  </div>
+					</div>
+					<table id="tabela">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>E-mail</th>
+								<th onclick="sortTable(3)">Seção atual <i class='bx bxs-sort-alt'></i></th>
+								<th>XP acumulado</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>113</td>
+								<td>Pedro de Caxias</td>
+								<td>pedrocax@gmail.com</td>
+								<td><span class="secao-box dois">SEÇÃO 2</span></td>
+								<td>8 xp</td>
+								<td>
+									<i class='bx bxs-error' id="erro"></i>
+									<i class='bx bx-search-alt-2'></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- ADMIN -->
+
+
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+	<div id="modalBanir" class="modal">
+		<div class="modal-content">
+			<h4>Tem certeza que deseja banir este usuário?</h4>
+			<input type="text" id="motivoInput" placeholder="Informe o motivo">
+			<div class="modal-actions">
+			<button id="confirmarBanir">CONFIRMAR</button>
+			<button onclick="fecharModalBanir()">CANCELAR</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="script.js"></script>
+</body>
+</html>
