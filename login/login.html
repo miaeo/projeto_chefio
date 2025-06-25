@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="login.css" />
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="../img/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../img/favicon-16x16.png">
+	<link rel="manifest" href="../img/site.webmanifest">
+
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container">
+    <!-- COLUNA ESQUERDA -->
+    <div class="coluna-esquerda">
+      <img src="../img/logo white.png" alt="chef.io" class="logo">
+      <h2>Bem-vindo de volta!</h2>
+      <p>Acesse sua conta agora mesmo.</p>
+      <button id="btnEntrar">ENTRAR</button>
+      <a href="#" class="link-senha">Esqueci minha senha</a>
+    </div>
+    <!-- COLUNA ESQUERDA -->
+
+    <!-- COLUNA DIREITA -->
+    <div class="coluna-direita" id="colunaDireita">
+      <!-- FORM DE CADASTRO -->
+      <div id="cadastro">
+        <h2>Crie sua conta</h2>
+        <p>Preencha seus dados</p>
+        <form id="registerForm">
+          <div class="input-group">
+            <i class='bx bx-user'></i>
+            <input type="text" id="nomeCad" placeholder="Nome" required />
+          </div>
+          <div class="input-group">
+            <i class='bx bx-envelope'></i>
+            <input type="email" id="emailCad" placeholder="Email" required />
+          </div>
+          <div class="input-group">
+            <i class='bx bx-lock-alt'></i>
+            <input type="password" id="senhaCad" placeholder="Senha" required />
+          </div>
+          <button type="submit">CADASTRAR</button>
+        </form>
+      </div>
+
+      <!-- FORM DE LOGIN -->
+      <div id="loginForm" class="login-form hidden">
+        <h2>Entrar</h2>
+        <p>Digite seus dados</p>
+        <div class="input-group">
+          <i class='bx bx-envelope'></i>
+          <input type="email" id="emailLogin" placeholder="Email" required />
+        </div>
+        <div class="input-group">
+          <i class='bx bx-lock-alt'></i>
+          <input type="password" id="senhaLogin" placeholder="Senha" required />
+        </div>
+        <div class="botoes-login">
+          <button id="botaoLogin">ENTRAR</button>
+          <button id="voltarBtn" class="voltar">VOLTAR</button>
+        </div>
+        <div id="carregando" class="carregando hidden"></div>
+      </div>
+    </div>
+    <!-- COLUNA DIREITA -->
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
