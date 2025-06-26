@@ -64,10 +64,12 @@
 				<div class="notificacao-wrapper">
 					<i class='bx bx-bell' id="iconeSino"></i>
 					<div class="notificacao-balao" id="notificacaoBalao">
-					  <button id="fecharNotificacao">×</button>
-					  <i class='bx bxs-bell' style="font-size: 60px;"></i>
-					  <h1><strong>Sem notificações por enquanto!</strong></h1>
-					  <p>Fique ligado! Notificações sobre suas atividades vão aparecer aqui.</p>
+						<button id="fecharNotificacao">×</button>
+						<div id="conteudoNotificacao">
+							<i class='bx bxs-bell' style="font-size: 60px;"></i>
+							<h1><strong>Sem notificações por enquanto!</strong></h1>
+							<p>Fique ligado! Notificações sobre suas atividades vão aparecer aqui.</p>
+						</div>
 					</div>
 				  </div>
 				<div class="user-info">
@@ -354,6 +356,17 @@
 			<div class="modal-actions">
 			<button id="confirmarBanir">CONFIRMAR</button>
 			<button onclick="fecharModalBanir()">CANCELAR</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="modalAlerta" class="modal">
+		<div class="modal-content">
+			<h4>Digite a mensagem de alerta para o usuário</h4>
+			<input type="text" id="mensagemAlerta" placeholder="Ex.: Evite spam...">
+			<div class="modal-actions">
+			<button id="confirmarAlerta">ENVIAR</button>
+			<button onclick="fecharModalAlerta()">CANCELAR</button>
 			</div>
 		</div>
 	</div>
