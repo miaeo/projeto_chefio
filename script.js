@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // RECEBE O NOME DO USUÁRIO E SUBSTITUI NA NAVBAR
   const nomeUsuario = localStorage.getItem("nomeUsuario");
+  const idUsuario = localStorage.getItem("idUsuario");
   const elementoNome = document.getElementById("nomeUsuario");
   const adminLink = document.getElementById("admin-link");
   const progresso = JSON.parse(localStorage.getItem(`progresso_${nomeUsuario}`)) || [];
@@ -12,6 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
   console.log("progresso:", progresso);
   console.log("Elemento nomeUsuario:", elementoNome);
   console.log("Nome do usuário:", nomeUsuario);
+  console.log("idUsuario:", idUsuario);
 
   if (nomeUsuario && nomeUsuario.toLowerCase() === "admin") {
 	  adminLink.style.display = "block";
@@ -45,6 +47,11 @@ window.addEventListener('DOMContentLoaded', () => {
       window.location.href = url;
     });
   });
+
+  if (idUsuario) {
+    carregarAlertaUsuario(idUsuario);
+  }
+  
 });
 
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
@@ -166,19 +173,19 @@ window.addEventListener("load", () => {
 const receitasNivel2 = [
     {
         nome: 'Brigadeiro',
-        tempo: '10 min',
+        tempo: '35 min',
         img: 'img/brigadeiro.jpg',
         url: 'receitas/brigadeiro/brigadeiro.html'
     },
     {
         nome: 'Macarrão Alho e Óleo',
-        tempo: '25 min',
+        tempo: '15 min',
         img: 'img/macarrao.jpeg',
         url: 'receitas/macarrao/macarrao.html'
     },
     {
         nome: 'Batata Assada',
-        tempo: '35 min',
+        tempo: '45 min',
         img: 'img/batata.jpg',
         url: 'receitas/batata/batata.html'
     }
@@ -272,6 +279,7 @@ function sortTable(columnIndex) {
     sortDirections[columnIndex] = isAscending ? 'desc' : 'asc';
 }
 
+// TABELA ADMIN COM DADOS DO BD
 function gerarTabelaAdmin() {
   console.log 
   const tabela = document.querySelector("#tabela tbody");
@@ -314,6 +322,7 @@ function gerarTabelaAdmin() {
     });
 }
 
+
 let usuarioParaBanir = null;
 
 document.addEventListener('click', function (e) {
@@ -322,11 +331,12 @@ document.addEventListener('click', function (e) {
     const modal = document.getElementById('modalBanir');
     modal.classList.add('show');
     usuarioParaBanir = usuarioId;
-    // Limpa campo motivo ao abrir modal
     document.getElementById('motivoInput').value = "";
   }
 });
 
+
+// FUNÇÃO PARA BANIR USUÁRIO (EXCLUSIVO ADMIN)
 function fecharModalBanir() {
   const modal = document.getElementById('modalBanir');
   modal.classList.remove('show');
@@ -361,3 +371,107 @@ document.getElementById('confirmarBanir').addEventListener('click', () => {
     }
   });
 });
+
+
+let usuarioParaAlertar = null;
+
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('warning')) {
+    const usuarioId = e.target.closest('tr').querySelector('td').innerText;
+    const modal = document.getElementById('modalAlerta');
+    modal.classList.add('show');
+    usuarioParaAlertar = usuarioId;
+    document.getElementById('mensagemAlerta').value = "";
+  }
+});
+
+function fecharModalAlerta() {
+  const modal = document.getElementById('modalAlerta');
+  modal.classList.remove('show');
+  usuarioParaAlertar = null;
+}
+
+document.getElementById('confirmarAlerta').addEventListener('click', () => {
+  const mensagem = document.getElementById('mensagemAlerta').value.trim();
+
+  if (!mensagem) {
+    alert("Por favor, digite a mensagem de alerta.");
+    return;
+  }
+
+  fetch(`http://localhost:3000/usuarios/${usuarioParaAlertar}/alerta`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ alerta: mensagem })
+  })
+  .then(res => {
+    if (res.ok) {
+      alert("Alerta enviado com sucesso.");
+      fecharModalAlerta();
+      gerarTabelaAdmin();
+    } else {
+      alert("Erro ao enviar alerta.");
+    }
+  });
+});
+
+// ENVIA NOTIFICAÇÃO DE ALERTA PARA O USUÁRIO
+function carregarAlertaUsuario(usuarioId) {
+  fetch(`http://localhost:3000/usuarios/${usuarioId}/alerta`)
+    .then(response => response.json())
+    .then(data => {
+      const conteudo = document.getElementById('conteudoNotificacao');
+
+      if (data.alerta && data.alerta.trim() !== "") {
+        // ATUALIZA A NOTIFICAÇÃO
+        conteudo.innerHTML = `
+          <i class='bx bxs-error-circle' style="font-size: 60px; color: #FEA946;"></i>
+          <h1><strong>Atenção!</strong></h1>
+          <p>${data.alerta}</p>
+          <button 
+              id="dismissAlerta" 
+              style="
+                font-size: 9px; 
+                font-family: Cambria; 
+                display: block; 
+                margin-top: 140px;
+              "
+            >
+              MARCAR COMO LIDA
+          </button>
+        `;
+
+        // BOLINHA LARANJA NO SININHO
+        const iconeSino = document.getElementById('iconeSino');
+        if (!document.querySelector('.notificacao-bolinha')) {
+          const bolinha = document.createElement('span');
+          bolinha.classList.add('notificacao-bolinha');
+          iconeSino.parentElement.appendChild(bolinha);
+        }
+
+        // QUANDO CLICA EM MARCAR COMO LIDA
+        document.getElementById('dismissAlerta').addEventListener('click', () => {
+          fetch(`http://localhost:3000/usuarios/${usuarioId}/alerta`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ alerta: "" }) // LIMPA ALERTA
+          }).then(() => {
+            conteudo.innerHTML = `
+              <i class='bx bxs-bell' style="font-size: 60px;"></i>
+              <h1><strong>Sem notificações por enquanto!</strong></h1>
+              <p>Fique ligado! Notificações sobre suas atividades vão aparecer aqui.</p>
+            `;
+
+            // REMOVE BOLINHA DE NOTIFICAÇÃO
+            const bolinhaExistente = document.querySelector('.notificacao-bolinha');
+            if (bolinhaExistente) bolinhaExistente.remove();
+          });
+        });
+      }
+    })
+    .catch(err => {
+      console.error("Erro ao carregar alerta:", err);
+    });
+}
