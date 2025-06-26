@@ -273,6 +273,16 @@ body {
 	transform: translateY(-10px);
 	transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;  
 }
+#content nav .notificacao-bolinha {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--warm-orange);
+  border-radius: 50%;
+  z-index: 10;
+}
 #content nav .notificacao-balao.ativo {
 	opacity: 1;
 	visibility: visible;
