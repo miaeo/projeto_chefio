@@ -106,6 +106,43 @@ app.patch('/usuarios/:id', (req, res) => {
   });
 });
 
+
+// Rota para emitir alerta para um usuário
+app.patch('/usuarios/:id/alerta', (req, res) => {
+  const { id } = req.params;
+  const { alerta } = req.body;
+
+  const query = 'UPDATE usuarios SET alerta = ? WHERE id = ?';
+  conexao.query(query, [alerta, id], (err, result) => {
+    if (err) {
+      console.error('Erro ao emitir alerta:', err);
+      return res.status(500).json({ message: 'Erro ao emitir alerta.' });
+    }
+
+    res.status(200).json({ message: 'Alerta enviado com sucesso.' });
+  });
+});
+
+// Rota para buscar alerta do usuário
+app.get('/usuarios/:id/alerta', (req, res) => {
+  const { id } = req.params;
+
+  const query = 'SELECT alerta FROM usuarios WHERE id = ?';
+  conexao.query(query, [id], (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar alerta:', err);
+      return res.status(500).json({ message: 'Erro ao buscar alerta.' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Usuário não encontrado.' });
+    }
+
+    const alerta = results[0].alerta;
+    res.status(200).json({ alerta });
+  });
+});
+
 // Inicia o servidor
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
