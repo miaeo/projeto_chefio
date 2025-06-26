@@ -45,6 +45,7 @@ btnLoginFinal.addEventListener("click", async () => {
       // Login OK
       if (data.usuario && data.usuario.nome) {
         localStorage.setItem("nomeUsuario", data.usuario.nome);
+        localStorage.setItem("idUsuario", data.usuario.id);
       }
       setTimeout(() => {
         carregando.classList.add("hidden");
@@ -57,7 +58,6 @@ btnLoginFinal.addEventListener("click", async () => {
         alert(`Seu acesso foi bloqueado.\nMotivo: ${data.motivo}`);
       }, 2000);
     } else {
-      // Outros erros de login (401 etc)
       setTimeout(() => {
         carregando.classList.add("hidden");
         alert("Email ou senha inválidos.");
