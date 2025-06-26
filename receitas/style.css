@@ -33,11 +33,7 @@ a {
 	--light-green: #E9FFF6;
 	--baby-pink: #F1E6FC;
 	--pink: #dbbcfa;
-	--warm-orange: #FEA946;
 	--light-warm-orange: #FFE5C2;
-	--mid-orange: #FDB362;
-	--deep-orange: #F68B1E;
-	--soft-orange: #FFF5E6;
 	--leaf-green: #40A737;
 	--soft-grey: #EEF2F5;
 	--deep-blue: #00569E;
@@ -45,8 +41,24 @@ a {
 	--neutral-grey: #E5E5E5;
 	--red: #FF6B6B;
 	--aqua-green: #4ECDC4;
-	--cream: #FFF9F2;
 	--warm-brown: #8B4F2F;
+}
+
+.tema-secao-1 {
+  --warm-orange: #FEA946;
+  --deep-orange: #F68B1E;
+  --soft-orange: #FFF3E6;
+  --mid-orange: #FDB362;
+  --cream: #FFF9F0;
+}
+
+/* Tema para Seção 2 (ex: Brigadeiro, Macarrão, Batata) */
+.tema-secao-2 {
+  --warm-orange: #c59feb;
+  --deep-orange: #A864E6;
+  --soft-orange: #F4ECFB;
+  --mid-orange: #DAB5FF;
+  --cream: #F9F2FF;
 }
 
 html {
