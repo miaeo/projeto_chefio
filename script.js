@@ -3,7 +3,7 @@ console.log('Antes do DOM');
 window.addEventListener('DOMContentLoaded', () => {
   showPage('licoes');
 
-  // RECEBE O NOME DO USUÁRIO E SUBSTITUI NA NAVBAR
+  // RECUPERA DADOS DO USUÁRIO ARMAZENADOS NO LOCALSTORAGE
   const nomeUsuario = localStorage.getItem("nomeUsuario");
   const idUsuario = localStorage.getItem("idUsuario");
   const elementoNome = document.getElementById("nomeUsuario");
@@ -15,17 +15,20 @@ window.addEventListener('DOMContentLoaded', () => {
   console.log("Nome do usuário:", nomeUsuario);
   console.log("idUsuario:", idUsuario);
 
+  // (ADMIN) EXIBE PAINEL
   if (nomeUsuario && nomeUsuario.toLowerCase() === "admin") {
 	  adminLink.style.display = "block";
     gerarTabelaAdmin();
   }
 
+  // EXIBE NOME DE USUÁRIO NA NAVBAR
   if (nomeUsuario && elementoNome) {
     elementoNome.textContent = nomeUsuario.toUpperCase();
   }
 
   atualizarCards(progresso);
 
+  // PARA REPETIR RECEITAS JÁ REALIZADAS, MARCADO COMO REVER
   const botoes = document.querySelectorAll('.iniciar');
   botoes.forEach(botao => {
     const url = botao.getAttribute('data-url');
@@ -33,21 +36,48 @@ window.addEventListener('DOMContentLoaded', () => {
     const receita = partes[partes.length - 2];
 
     if (progresso.includes(receita)) {
-      botao.textContent = 'CONCLUÍDO';
-      botao.classList.add('botao-concluido');
-      botao.disabled = true; // desativa o clique
-      botao.style.cursor = 'not-allowed'; // cursor de bloqueado
+      const container = botao.parentElement;
+      const wrapper = document.createElement("div");
+      wrapper.className = "botoes-coluna";
+      wrapper.style.display = "flex";
+      wrapper.style.flexDirection = "column";
+      wrapper.style.gap = "8px";
+
+      const botaoConcluido = document.createElement("button");
+      botaoConcluido.textContent = "CONCLUÍDO";
+      botaoConcluido.className = "botao-concluido";
+      botaoConcluido.disabled = true;
+
+      const botaoRever = document.createElement("button");
+      botaoRever.textContent = "VER NOVAMENTE";
+      botaoRever.className = "ver-novamente";
+      botaoRever.setAttribute("data-url", url);
+
+      wrapper.appendChild(botaoConcluido);
+      wrapper.appendChild(botaoRever);
+
+      container.removeChild(botao);
+      container.appendChild(wrapper);
+
+      botaoRever.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const url = botaoRever.getAttribute('data-url');
+        if (url) {
+          localStorage.setItem("reverReceita", "true");
+          window.location.href = url;
+        }
+      });
     } else {
       botao.addEventListener('click', () => {
         window.location.href = url;
       });
     }
-    // Redirecionar ao clicar
     botao.addEventListener('click', () => {
       window.location.href = url;
     });
   });
 
+  // CARREGA POSSÍVEIS ALERTAS PARA O USUÁRIO NAS NOTIFICAÇÕES
   if (idUsuario) {
     carregarAlertaUsuario(idUsuario);
   }
@@ -119,6 +149,16 @@ document.querySelectorAll('.iniciar').forEach(botao => {
             window.location.href = url;
         }
     });
+});
+document.querySelectorAll('.ver-novamente').forEach(botao => {
+  botao.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const url = botao.getAttribute('data-url');
+    if (url) {
+      localStorage.setItem("reverReceita", "true");
+      window.location.href = url;
+    }
+  });
 });
 
 
@@ -279,7 +319,9 @@ function sortTable(columnIndex) {
     sortDirections[columnIndex] = isAscending ? 'desc' : 'asc';
 }
 
-// TABELA ADMIN COM DADOS DO BD
+
+
+// BUSCA USUÁRIOS NO BD PARA PREENCHER TABELA (ADMIN)
 function gerarTabelaAdmin() {
   console.log 
   const tabela = document.querySelector("#tabela tbody");
@@ -316,15 +358,48 @@ function gerarTabelaAdmin() {
           </tr>
         `;
       });
+      carregarMensagensSuporte();
     })
     .catch(err => {
       console.error("Erro ao carregar usuários:", err);
     });
 }
 
+// BUSCA MENSAGENS DO SUPORTE NO BD PARA PREENCHER TABELA (ADMIN)
+function carregarMensagensSuporte() {
+  const tabelaSuporte = document.querySelector("#tabelaSuporte tbody");
+  tabelaSuporte.innerHTML = "";
 
+  fetch('http://localhost:3000/suporte')
+    .then(res => res.json())
+    .then(mensagens => {
+      if (mensagens.length === 0) {
+        tabelaSuporte.innerHTML = `<tr><td colspan="5">Nenhuma mensagem de suporte encontrada.</td></tr>`;
+        return;
+      }
+
+      mensagens.forEach(msg => {
+        const data = new Date(msg.data_envio).toLocaleString('pt-BR');
+        tabelaSuporte.innerHTML += `
+          <tr>
+            <td>${msg.id}</td>
+            <td>${msg.email}</td>
+            <td>${msg.assunto}</td>
+            <td>${msg.descricao}</td>
+            <td>${data}</td>
+          </tr>
+        `;
+      });
+    })
+    .catch(err => {
+      console.error("Erro ao carregar suporte:", err);
+    });
+}
+
+
+
+// FUNÇÃO DE BANIR USUÁRIO (ADMIN)
 let usuarioParaBanir = null;
-
 document.addEventListener('click', function (e) {
   if (e.target.classList.contains('ban')) {
     const usuarioId = e.target.dataset.id;
@@ -335,8 +410,6 @@ document.addEventListener('click', function (e) {
   }
 });
 
-
-// FUNÇÃO PARA BANIR USUÁRIO (EXCLUSIVO ADMIN)
 function fecharModalBanir() {
   const modal = document.getElementById('modalBanir');
   modal.classList.remove('show');
@@ -365,7 +438,7 @@ document.getElementById('confirmarBanir').addEventListener('click', () => {
     if (res.ok) {
       alert("Usuário banido com sucesso.");
       fecharModalBanir();
-      gerarTabelaAdmin(); // atualiza tabela
+      gerarTabelaAdmin();
     } else {
       alert("Erro ao banir usuário.");
     }
@@ -373,8 +446,8 @@ document.getElementById('confirmarBanir').addEventListener('click', () => {
 });
 
 
+// FUNÇÃO DE ENVIAR ALERTA PARA USUÁRIO (ADMIN)
 let usuarioParaAlertar = null;
-
 document.addEventListener('click', function (e) {
   if (e.target.classList.contains('warning')) {
     const usuarioId = e.target.closest('tr').querySelector('td').innerText;
@@ -417,7 +490,8 @@ document.getElementById('confirmarAlerta').addEventListener('click', () => {
   });
 });
 
-// ENVIA NOTIFICAÇÃO DE ALERTA PARA O USUÁRIO
+
+// CARREGA ALERTA DO USUÁRIO NAS NOTIFICAÇÕES
 function carregarAlertaUsuario(usuarioId) {
   fetch(`http://localhost:3000/usuarios/${usuarioId}/alerta`)
     .then(response => response.json())
@@ -425,7 +499,6 @@ function carregarAlertaUsuario(usuarioId) {
       const conteudo = document.getElementById('conteudoNotificacao');
 
       if (data.alerta && data.alerta.trim() !== "") {
-        // ATUALIZA A NOTIFICAÇÃO
         conteudo.innerHTML = `
           <i class='bx bxs-error-circle' style="font-size: 60px; color: #FEA946;"></i>
           <h1><strong>Atenção!</strong></h1>
@@ -443,7 +516,7 @@ function carregarAlertaUsuario(usuarioId) {
           </button>
         `;
 
-        // BOLINHA LARANJA NO SININHO
+        // BOLINHA DE NOTIFICAÇÃO
         const iconeSino = document.getElementById('iconeSino');
         if (!document.querySelector('.notificacao-bolinha')) {
           const bolinha = document.createElement('span');
@@ -451,12 +524,12 @@ function carregarAlertaUsuario(usuarioId) {
           iconeSino.parentElement.appendChild(bolinha);
         }
 
-        // QUANDO CLICA EM MARCAR COMO LIDA
+        // APÓS CLICAR EM "MARCAR COMO LIDO"
         document.getElementById('dismissAlerta').addEventListener('click', () => {
           fetch(`http://localhost:3000/usuarios/${usuarioId}/alerta`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ alerta: "" }) // LIMPA ALERTA
+            body: JSON.stringify({ alerta: "" })
           }).then(() => {
             conteudo.innerHTML = `
               <i class='bx bxs-bell' style="font-size: 60px;"></i>
@@ -464,7 +537,6 @@ function carregarAlertaUsuario(usuarioId) {
               <p>Fique ligado! Notificações sobre suas atividades vão aparecer aqui.</p>
             `;
 
-            // REMOVE BOLINHA DE NOTIFICAÇÃO
             const bolinhaExistente = document.querySelector('.notificacao-bolinha');
             if (bolinhaExistente) bolinhaExistente.remove();
           });
@@ -475,3 +547,37 @@ function carregarAlertaUsuario(usuarioId) {
       console.error("Erro ao carregar alerta:", err);
     });
 }
+
+
+// ENVIO DE MENSAGEM PARA O SUPORTE
+document.querySelector('.formulario').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const email = document.getElementById('email').value;
+  const assunto = document.getElementById('assunto').value;
+  const descricao = document.getElementById('descricao').value;
+
+  if (!email || !assunto || !descricao) {
+    alert("Preencha todos os campos.");
+    return;
+  }
+
+  try {
+    const response = await fetch('http://localhost:3000/suporte', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, assunto, descricao })
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message);
+      this.reset();
+    } else {
+      alert(data.message || 'Erro ao enviar mensagem.');
+    }
+  } catch (err) {
+    alert('Erro ao conectar com o servidor.');
+  }
+});
