@@ -70,6 +70,27 @@
     <!-- COLUNA DIREITA -->
   </div>
 
+  <!-- MODAL 1: EMAIL -->
+  <div id="modalEmail" class="modal hidden">
+    <div class="modal-content">
+      <h3>Esqueci minha senha</h3>
+      <input type="email" id="emailRecuperar" placeholder="Digite seu email" /><br> <br>
+      <button id="proximoPasso">PRÓXIMO</button>
+      <button onclick="fecharModalEmail()">CANCELAR</button>
+      <div id="carregandoRecuperacao" class="carregando hidden"></div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: NOVA SENHA -->
+  <div id="modalNovaSenha" class="modal hidden">
+    <div class="modal-content">
+      <h3>Redefinir senha</h3>
+      <input type="password" id="novaSenha" placeholder="Digite a nova senha" /> <br> <br>
+      <button id="confirmarRecuperacao">REDEFINIR</button>
+      <button onclick="fecharModalSenha()">CANCELAR</button>
+    </div>
+  </div>
+
   <script src="login.js"></script>
 </body>
 </html>
