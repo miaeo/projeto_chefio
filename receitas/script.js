@@ -16,6 +16,7 @@ document.addEventListener('click', (e) => {
 });
 
 
+
 // REGISTRAR PROGRESSO DE RECEITAS CONCLUÍDAS
 function registrarProgresso() {
 	console.log('Função registrarProgresso() chamada');
@@ -46,6 +47,9 @@ function registrarProgresso() {
     }
 }
 
+
+
+// TRANSIÇÃO ENTRE ETAPAS DA RECEITA
 document.addEventListener('DOMContentLoaded', function () {
 	const btn = document.querySelector('.continuar');
 	const infoDiv = document.querySelector('.info');
@@ -86,6 +90,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 });
 
+
+
+// REVISÃO DA RECEITA
 window.addEventListener("DOMContentLoaded", () => {
   const rever = localStorage.getItem("reverReceita") === "true";
   
