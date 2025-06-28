@@ -86,6 +86,8 @@ projeto_chefio/
 ├── index.html # Página principal
 ├── style.css 
 ├── script.js
+├── LICENSE # Este projeto está licenciado sob os termos da licença MIT
 └── README.md # Este arquivo
 ```
+<br>
 <div align="right">Made with 💜 by <a href="https://github.com/miaeo">miaeo</a>.</div>
