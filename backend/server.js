@@ -90,6 +90,19 @@ app.get('/usuarios', (req, res) => {
   });
 });
 
+// Rota para listar mensagens de suporte (admin)
+app.get('/suporte', (req, res) => {
+  const query = 'SELECT * FROM suporte ORDER BY data_envio DESC';
+  conexao.query(query, (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar mensagens de suporte:', err);
+      return res.status(500).json({ message: 'Erro ao buscar mensagens.' });
+    }
+
+    res.status(200).json(results);
+  });
+});
+
 // Rota para atualizar status de banimento de um usuário
 app.patch('/usuarios/:id', (req, res) => {
   const { id } = req.params;
@@ -140,6 +153,69 @@ app.get('/usuarios/:id/alerta', (req, res) => {
 
     const alerta = results[0].alerta;
     res.status(200).json({ alerta });
+  });
+});
+
+// Rota para redefinir a senha (etapa de verificação do email)
+app.post('/verificar-email', (req, res) => {
+  const { email } = req.body;
+  const query = 'SELECT * FROM usuarios WHERE email = ?';
+
+  conexao.query(query, [email], (err, results) => {
+    if (err) {
+      console.error("Erro ao verificar email:", err);
+      return res.status(500).json({ existe: false });
+    }
+
+    if (results.length > 0) {
+      res.status(200).json({ existe: true });
+    } else {
+      res.status(200).json({ existe: false });
+    }
+  });
+});
+
+// Rota para redefinir a senha
+app.patch('/redefinir-senha', async (req, res) => {
+  const { email, novaSenha } = req.body;
+
+  if (!email || !novaSenha) {
+    return res.status(400).json({ message: 'Dados incompletos' });
+  }
+
+  const hashed = await bcrypt.hash(novaSenha, 10);
+  const query = 'UPDATE usuarios SET senha = ? WHERE email = ?';
+
+  conexao.query(query, [hashed, email], (err, result) => {
+    if (err) {
+      console.error('Erro:', err);
+      return res.status(500).json({ message: 'Erro ao redefinir senha' });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: 'Email não encontrado' });
+    }
+
+    res.status(200).json({ message: 'Senha redefinida com sucesso!' });
+  });
+});
+
+// Rota para envio de suporte
+app.post('/suporte', (req, res) => {
+  const { email, assunto, descricao } = req.body;
+
+  if (!email || !assunto || !descricao) {
+    return res.status(400).json({ message: 'Preencha todos os campos obrigatórios.' });
+  }
+
+  const query = 'INSERT INTO suporte (email, assunto, descricao) VALUES (?, ?, ?)';
+  conexao.query(query, [email, assunto, descricao], (err, result) => {
+    if (err) {
+      console.error('Erro ao registrar suporte:', err);
+      return res.status(500).json({ message: 'Erro ao enviar mensagem' });
+    }
+
+    res.status(200).json({ message: 'Mensagem enviada com sucesso.' });
   });
 });
 
