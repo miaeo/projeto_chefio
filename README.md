@@ -79,7 +79,7 @@ projeto_chefio/
 │ ├── login.js
 │ └── login.css
 ├── receitas/ # Receitas organizadas por pasta
-│ ├── arroz/ # _exemplo_
+│ ├── arroz/
 │ │ └── arroz.html
 │ ├── script.js
 │ └── style.css
