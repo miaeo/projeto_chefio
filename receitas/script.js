@@ -15,6 +15,8 @@ document.addEventListener('click', (e) => {
   }
 });
 
+
+// REGISTRAR PROGRESSO DE RECEITAS CONCLUÍDAS
 function registrarProgresso() {
 	console.log('Função registrarProgresso() chamada');
     const nomeUsuario = localStorage.getItem("nomeUsuario");
@@ -71,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			btn.textContent = 'FINALIZAR';
 			etapaAtual = 'parabens';
 		} else if (etapaAtual === 'parabens') {
-			console.log("Entrou no bloco parabens"); // <--- test
 			registrarProgresso();
 			const modal = document.getElementById('modal-badge');
 			modal.style.display = 'flex';
@@ -83,4 +84,31 @@ document.addEventListener('DOMContentLoaded', function () {
 			behavior: 'smooth'
 		});
 	});
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  const rever = localStorage.getItem("reverReceita") === "true";
+  
+  if (rever) {
+    document.querySelectorAll('.aprender, .info, .parabens').forEach(el => {
+      el.classList.remove('active');
+    });
+
+    const receita = document.querySelector('.receita');
+    if (receita) {
+      receita.classList.add('active');
+
+      const voltar = document.createElement("button");
+      voltar.textContent = "VOLTAR AO MENU";
+      voltar.className = "continuar";
+      voltar.style.marginTop = "20px";
+
+      voltar.addEventListener("click", () => {
+        localStorage.removeItem("reverReceita");
+        window.location.href = "../../index.html";
+      });
+
+      receita.appendChild(voltar);
+    }
+  }
 });
