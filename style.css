@@ -10,6 +10,7 @@ a {
 	text-decoration: none;
 }
 
+/* ===== VARIÁVEIS GLOBAIS ===== */
 :root {
 	--dmsans: 'DM Sans', sans-serif;
 	--crete-round: 'Crete Round', sans-serif;
@@ -43,6 +44,7 @@ a {
 	--warm-brown: #8B4F2F;
 }
 
+/* ===== TEMAS POR SEÇÃO ===== */
 .nivel-1 {
   --btn-bg: #FEA946;
   --btn-hover-bg: #FDB362;
@@ -61,6 +63,7 @@ a {
   --btn-border-color: #18B0FF;
 }
 
+/* ===== ESTRUTURA GERAL ===== */
 html {
 	overflow-x: hidden;
 }
@@ -72,7 +75,7 @@ body {
 
 
 
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 #sidebar {
 	position: fixed;
 	top: 0;
@@ -190,11 +193,10 @@ body {
 #suporte-link{
 	margin-top: 670px;
 }
-/* SIDEBAR */
+/* ===== SIDEBAR ===== */
 
 
 
-/* CONTENT */
 #content {
 	position: relative;
 	width: calc(100% - 220px);
@@ -207,7 +209,8 @@ body {
 }
 
 
-/* NAVBAR */
+
+/* ===== NAVBAR ===== */
 #content nav {
 	height: 56px;
 	background: var(--light);
@@ -248,7 +251,7 @@ body {
 	color: var(--warm-brown);
 }
 
-/* SININHO */
+/* ===== SININHO DE NOTIFICAÇÃO ===== */
 #content nav .notificacao-wrapper {
 	position: relative;
 	display: inline-block;
@@ -346,8 +349,6 @@ body {
 	transform: scale(1.1);
 	transition: transform 0.2s ease;
 }
-/* SININHO */
-
 #content nav .profile img {
 	width: 36px;
 	height: 36px;
@@ -359,38 +360,33 @@ body {
 	align-items: center;
 	gap: 12px;
 }
-
 #content nav .user-info {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 }
-
 #content nav .user-text {
 	display: flex;
 	flex-direction: column;
 	line-height: 1.2;
 	color: var(--deep-orange);
 }
-
 #content nav .profile i {
 	font-size: 24px;
 }
-
 #content nav .user-text span {
 	font-size: 12px;
 	color: var(--dark-grey);	
 }
-
 #content nav .user-text strong {
 	font-size: 16px;
 	font-weight: bold;
 }
-/* NAVBAR */
+/* ===== NAVBAR ===== */
 
 
 
-/* MAIN */
+/* ===== MAIN ===== */
 #content main {
 	width: 100%;
 	padding: 36px 24px;
@@ -399,7 +395,7 @@ body {
 	overflow-y: auto;
 }
 
-/* LIÇÕES */
+/* ===== PÁGINA DE LIÇÕES ===== */
 #content main .content-wrapper {
     display: flex;
     justify-content: space-between;
@@ -408,7 +404,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
 }
-/* CARDS */
+
+/* ===== CARDS ===== */
 #content main .cards {
     flex: 1;
     margin-left: 100px;
@@ -465,9 +462,8 @@ body {
     transform: translateY(-50%);
     height: 24px;
 }
-/* CARDS */
 
-/* NÍVEIS E SEÇÕES */
+/* ===== NÍVEIS E SEÇÕES ===== */
 #content main .niveis {
     flex: 2;
 }
@@ -670,13 +666,12 @@ body {
     left: 50%;
     transform: translateX(-50%);
 }
-/* NÍVEIS E SEÇÕES */
-/* LIÇÕES */
+/* ===== PÁGINA DE LIÇÕES ===== */
 
 
 
 
-/* SOBRE */
+/* ===== PÁGINA DE SOBRE ===== */
 #sobre h1 {
 	text-align: left;
 	font-size: 28px;
@@ -695,7 +690,6 @@ body {
 	border-bottom: 2px solid var(--neutral-grey);
 	margin-bottom: 20px;
 }
-  
 .tab-btn {
 	background: none;
 	border: none;
@@ -707,11 +701,9 @@ body {
 	transition: color 0.3s ease;
 	position: relative;
 }
-  
 .tab-btn.active {
 	color: var(--warm-orange)
 }
-  
 .tab-indicator {
 	position: absolute;
 	bottom: 0;
@@ -721,23 +713,20 @@ body {
 	transition: 0.3s;
 	left: 0;
 }
-  
 .tab-content {
 	display: none;
 	padding: 20px 250px;
 	color: var(--dark);
 	text-align: justify;
 }
-  
 .tab-content.active {
 	display: block;
 }
-/* SOBRE */
+/* ===== PÁGINA DE SOBRE ===== */
 
 
 
-/* ADMIN */
-
+/* ===== PÁGINA DE ADMIN ===== */
 #admin .head-title {
 	display: flex;
 	align-items: center;
@@ -789,8 +778,7 @@ body {
 	margin-bottom: 20px;
 }
 
-
-/* TABELA ADMIN */
+/* ===== TABELAS DE ADMIN ===== */
 .table-box {
     background-color: var(--light);
     border-radius: 20px;
@@ -918,12 +906,11 @@ table td i:hover {
   max-width: 300px;
   word-wrap: break-word;
 }
-/* TABELA ADMIN */
+/* ===== PÁGINA DE ADMIN ===== */
 
 
 
-
-/* SUPORTE */
+/* ===== PÁGINA DE SUPORTE ===== */
 .suporte-container {
 	max-width: 1000px;
 	margin: 100px auto;
@@ -986,11 +973,9 @@ table td i:hover {
 	border-radius: 10px;
 	background-color: var(--light-grey);
 }
-  
 .formulario textarea {
 	resize: none;
 }
-  
 .formulario button {
 	font-family: var(--dmsans);
 	align-self: flex-end;
@@ -1017,7 +1002,7 @@ table td i:hover {
 	margin-top: 25px;
 	border: none;
 }
-/* SUPORTE */
+/* ===== PÁGINA DE SUPORTE ===== */
 
 
 .page {
@@ -1027,13 +1012,10 @@ table td i:hover {
 .page.active {
     display: block;
 }
+/* ===== MAIN ===== */
 
 
-/* MAIN */
-/* CONTENT */
-
-
-/* MODAIS */
+/* ===== MODAIS DE AÇÃO (ADMIN) ===== */
 .modal {
 	font-family: var(--dmsans);
 	color: var(--dark);
@@ -1046,11 +1028,9 @@ table td i:hover {
   	align-items: center;
   	z-index: 1000;
 }
-
 .modal.show {
   	display: flex;
 }
-
 .modal-content {
   	background: white;
   	padding: 30px;
@@ -1058,7 +1038,6 @@ table td i:hover {
   	width: 400px;
 	text-align: center;
 }
-
 #modalBanir input,
 #modalAlerta input {
 	width: 80%;
@@ -1070,7 +1049,6 @@ table td i:hover {
 	margin-top: 15px;
  	margin-bottom: 15px;
 }
-
 #modalBanir button,
 #modalAlerta button {
 	font-family: var(--dmsans);
@@ -1086,7 +1064,6 @@ table td i:hover {
     cursor: pointer;
     margin-left: auto;
 }
-
 #modalBanir button:hover,
 #modalAlerta button:hover {
 	background: var(--mid-orange);
@@ -1094,15 +1071,16 @@ table td i:hover {
 	border: none;
 	border-bottom: var(--deep-orange) solid 4px;
 }
-
 #modalBanir button:active,
 #modalAlerta button:active {
 	background: var(--mid-orange);
 	margin-top: 5px;
 	border: none;
 }
-/* MODAIS */
+/* ===== MODAIS DE AÇÃO (ADMIN) ===== */
 
+
+/* ===== RESPONSIVO ===== */
 @media screen and (max-width: 768px) {
 	#sidebar {
 		width: 200px;
