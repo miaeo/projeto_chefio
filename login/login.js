@@ -1,3 +1,4 @@
+// ELEMENTOS PRINCIPAIS DO LOGIN E CADASTRO
 const btnEntrar = document.getElementById("btnEntrar");
 const cadastro = document.getElementById("cadastro");
 const loginForm = document.getElementById("loginForm");
@@ -6,6 +7,9 @@ const voltarBtn = document.getElementById("voltarBtn");
 const carregando = document.getElementById("carregando");
 const registerForm = document.getElementById("registerForm");
 
+
+
+// ALTERNAR ENTRE TELA DE CADASTRO/LOGIN
 btnEntrar.addEventListener("click", () => {
   cadastro.classList.add("hidden");
   setTimeout(() => {
@@ -19,6 +23,8 @@ voltarBtn.addEventListener("click", () => {
   loginForm.classList.remove("show");
   cadastro.classList.remove("hidden");
 });
+
+
 
 // LOGIN
 btnLoginFinal.addEventListener("click", async () => {
@@ -58,7 +64,7 @@ btnLoginFinal.addEventListener("click", async () => {
         alert(`Seu acesso foi bloqueado.\nMotivo: ${data.motivo}`);
       }, 2000);
     } else {
-      // Outros erros de login (401 etc)
+      // Credencial inválida
       setTimeout(() => {
         carregando.classList.add("hidden");
         alert("Email ou senha inválidos.");
@@ -71,6 +77,8 @@ btnLoginFinal.addEventListener("click", async () => {
     }, 2000);
   }
 });
+
+
 
 // CADASTRO
 registerForm.addEventListener("submit", async (e) => {
@@ -155,6 +163,7 @@ document.getElementById('proximoPasso').addEventListener('click', () => {
   });
 });
 
+// ESQUECI MINHA SENHA
 // Etapa 2 - Redefinir senha
 document.getElementById('confirmarRecuperacao').addEventListener('click', () => {
   const novaSenha = document.getElementById('novaSenha').value;
