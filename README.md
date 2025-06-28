@@ -67,7 +67,7 @@ node server.js
 A aplicação pode ser acessada em http://localhost/projeto_chefio/login/login.html após iniciar o servidor.
 
 ## Estrutura do projeto
-
+```bash
 projeto_chefio/
 ├── backend/ # Backend com Node.js
 │ ├── db.js
@@ -87,5 +87,5 @@ projeto_chefio/
 ├── style.css 
 ├── script.js
 └── README.md # Este arquivo
-
+```
 <div align="right">Made with 💜 by <a href="https://github.com/miaeo">miaeo</a>.</div>
