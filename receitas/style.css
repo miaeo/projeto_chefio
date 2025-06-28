@@ -97,20 +97,15 @@ body {
 	gap: 8px;
 	color: var(--dark);
 	font-size: 16px;
+	text-decoration: none;
 	font-weight: 500;
 }
 #content nav .profile i {
 	font-size: 24px;
 	color: var(--warm-brown);
 }
-#content nav .profile img {
-	width: 36px;
-	height: 36px;
-	object-fit: cover;
-	border-radius: 10px;
-}
 
-/* ===== NOTIFICAÇÃO - SININHO ===== */
+/* SININHO */
 #content nav .notificacao-wrapper {
 	position: relative;
 	display: inline-block;
@@ -136,24 +131,59 @@ body {
 	visibility: visible;
 	transform: translateY(0);
 }
-#content nav .notificacao-balao::before,
-#content nav .notificacao-balao::after {
+#content nav .notificacao-balao::before {
 	content: "";
 	position: absolute;
 	top: -12px;
 	right: 10px;
+	width: 0;
+	height: 0;
 	border-left: 10px solid transparent;
 	border-right: 10px solid transparent;
-}
-#content nav .notificacao-balao::before {
 	border-bottom: 12px solid var(--neutral-grey);
 	z-index: 1;
 }
 #content nav .notificacao-balao::after {
+	content: "";
+	position: absolute;
 	top: -10px;
 	right: 11px;
+	width: 0;
+	height: 0;
+	border-left: 9px solid transparent;
+	border-right: 9px solid transparent;
 	border-bottom: 10px solid var(--light);
 	z-index: 2;
+}
+#content nav .notificacao-balao button {
+	position: absolute;
+	top: 5px;
+	right: 8px;
+	background: none;
+	border: none;
+	font-size: 16px;
+	cursor: pointer;
+	color: var(--dark-grey)
+}
+#content nav .notificacao-balao i {
+	color: var(--warm-orange);
+	margin-bottom: 15px;
+	text-align: center;
+	justify-content: center;
+	width: 100%;
+	display: block;
+}
+#content nav .notificacao-balao h1 {
+	font-size: 18px;
+	margin-bottom: 10px;
+	color: var(--dark);
+	text-align: center;
+}
+#content nav .notificacao-balao p {
+	font-size: 12px;
+	margin-bottom: 10px;
+	color: var(--darker-grey);
+	text-align: center;
 }
 #iconeSino {
 	cursor: pointer;
@@ -161,6 +191,27 @@ body {
 }
 #iconeSino:hover {
 	transform: scale(1.1);
+	transition: transform 0.2s ease;
+}
+/* SININHO */
+#content nav .profile img {
+	width: 36px;
+	height: 36px;
+	object-fit: cover;
+	border-radius: 10px;
+}
+#content nav .profile {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+#content nav .user-info {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+#content nav .profile i {
+	font-size: 24px;
 }
 /* ===== NAVBAR ===== */
 
@@ -184,30 +235,50 @@ body {
     margin: 0 auto;
     gap: 24px;
 }
-.info, .aprender, .parabens {
+#content main .content-wrapper .info, .aprender, .parabens {
     background: var(--light);
     padding: 24px;
     border-radius: 12px;
     border-bottom: var(--neutral-grey) solid 5px;
 }
-.info h1, .aprender h1, .parabens h1 {
+#content main .content-wrapper .info h1,
+#content main .content-wrapper .aprender h1,
+#content main .content-wrapper .parabens h1 {
     font-family: var(--crete-round);
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 10px;
 }
-.info p, .aprender p {
-    font-size: 18px;
-    line-height: 1.5;
-    margin-bottom: 10px;
+#content main .content-wrapper .info b {
+    font-family: var(--crete-round);
+    font-weight: 600;
+    color: var(--warm-orange);
 }
-.info img {
+#content main .content-wrapper .info a,
+#content main .content-wrapper .aprender a {
+    color: var(--darker-grey);
+    font-weight: 500;
+}
+#content main .content-wrapper .info b:hover {
+    font-style: italic;
+    color: var(--deep-orange);
+}
+#content main .content-wrapper .info img {
 	width: 100%;
     height: 200px;
     border-radius: 10px;
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
     object-fit: cover;
 }
+#content main .content-wrapper .info p,
+#content main .content-wrapper .aprender p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
 .receita {
     background: linear-gradient(to bottom, var(--soft-orange)5%, var(--light) 30%);
     padding: 32px;
@@ -222,6 +293,7 @@ body {
     border-radius: 10px;
     margin: 20px auto;
     object-fit: fill;
+    display: block;
 }
 .tag {
     display: inline-block;
@@ -235,6 +307,7 @@ body {
 }
 .receita h2 {
     font-family: var(--crete-round);
+    margin-top: 10px;
     font-size: 28px;
     color: var(--deep-orange);
 }
@@ -242,6 +315,8 @@ body {
     display: flex;
     justify-content: space-between;
     max-width: 500px;
+    padding: 0;
+    list-style: none;
     margin: 20px 0;
 }
 .tempo li {
@@ -252,12 +327,32 @@ body {
     font-weight: bold;
     color: var(--warm-orange);
 }
+.receita p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.receita h3 {
+    font-family: var(--crete-round);
+    font-size: 24px;
+    margin-top: 24px;
+}
+.receita hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
 .ingredientes, .metodo {
     margin-top: 10px;
     padding-left: 20px;
 }
+.ingredientes li::marker {
+    color: var(--deep-orange);
+}
 .metodo li {
     margin-bottom: 16px;
+}
+.metodo li::marker {
+	font-weight: bold;
 }
 .metodo li strong {
     font-family: var(--crete-round);
@@ -270,43 +365,62 @@ body {
 	display: none;
 	transition: opacity 0.5s ease;
 }
-.info.active, .receita.active, .aprender.active, .parabens.active {
+
+.info.active,
+.receita.active,
+.aprender.active,
+.parabens.active {
 	display: block;
 	opacity: 1;
 }
 
 /* ===== BOTÕES CONTINUAR E FECHAR MODAL ===== */
-.continuar, .fechar-modal {
-	display: flex;
-	background: var(--warm-orange);
-	color: var(--light);
-	padding: 15px 20px;
-	font-weight: bold;
-	border: none;
-	border-radius: 10px;
-	border-bottom: var(--deep-orange) solid 5px;
-	cursor: pointer;
-	font-size: 14px;
+#content main .content-wrapper .continuar,
+#content main #modal-badge .fechar-modal {
+    display: flex;
 	font-family: var(--dmsans);
-	margin-left: auto;
+	margin-right: 10px;
+    background: var(--warm-orange);
+    color: var(--light);
+	font-size: 14px;
+    font-weight: bold;
+    padding: 15px 20px;
+	border: none;
+    border-bottom: var(--deep-orange) solid 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-left: auto;
 }
-.continuar:hover, .fechar-modal:hover {
+#content main .content-wrapper .continuar:hover,
+#content main #modal-badge .fechar-modal:hover {
+	background: var(--deep-orange);
+	color: var(--light);
 	background: var(--mid-orange);
 	border-top: var(--light) solid 4px;
+	border: none;
 	border-bottom: var(--deep-orange) solid 4px;
 }
-.continuar:active, .fechar-modal:active {
+#content main .content-wrapper .continuar:active,
+#content main #modal-badge .fechar-modal:active {
 	background: var(--mid-orange);
+    border: none;
 	border-top: var(--light) solid 5px;
 }
 .nutri-wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 20px;
-  margin: 30px 0;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .nutri-imagem {
+  width: auto;
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
   max-width: 43%;
+  flex-shrink: 0;
 }
 .fatos-nutricionais {
   border: 1px solid var(--warm-orange);
@@ -314,7 +428,10 @@ body {
   padding: 16px;
   max-width: 400px;
   width: 48%;
+  margin: 30px auto;
+  font-family: var(--dmsans);
 }
+
 .fatos-nutricionais h3 {
   color: var(--warm-orange);
   font-family: var(--crete-round);
@@ -323,19 +440,67 @@ body {
   font-weight: bold;
   margin-bottom: 12px;
   border-bottom: 1px solid var(--dark-grey);
+  padding-bottom: 4px;
 }
 
-/* ===== RESUMO FINAL ===== */
+.fatos-nutricionais h3 span {
+  font-weight: normal;
+  font-size: 12px;
+  color: #555;
+  text-transform: none;
+}
+
+.nutri-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.nutri-info div {
+  text-align: center;
+  flex: 1;
+}
+
+.nutri-info strong {
+  display: block;
+  font-size: 18px;
+  color: #000;
+}
+
+.nutri-info span {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.nutri-obs {
+  border-top: 1px solid var(--dark-grey);
+  padding-top: 8px;
+  margin: 0;
+}
+
 .resumo-aprendizado {
+	max-width: 100%;
+	width: 100%;
+	box-sizing: border-box;
 	background-color: var(--cream);
 	border-left: 5px solid var(--warm-orange);
 	padding: 16px;
 	border-radius: 10px;
 	margin-top: 20px;
 }
+
 .resumo-aprendizado h3 {
+	margin-top: 0;
 	color: var(--deep-orange);
 	font-family: var(--crete-round);
+	font-size: 1.2rem;
+}
+
+.resumo-aprendizado ul {
+	margin: 10px 0 0;
+	padding-left: 20px;
+	list-style: disc;
 }
 /* ===== MAIN ===== */
 
@@ -373,10 +538,12 @@ body {
 	#sidebar {
 		width: 200px;
 	}
+
 	#content {
 		width: calc(100% - 60px);
 		left: 200px;
 	}
+
 	#content nav .nav-link {
 		display: none;
 	}
