@@ -1,6 +1,14 @@
-# Projeto _chef.io_
+<p align="center">
+  <img width="430" height="138" alt="logo_color" src="https://github.com/user-attachments/assets/94c5615e-ea10-481e-8a14-9f90cdd7615a" />
+</p>
 
 Projeto de uma plataforma web de ensino de culinária com elementos de **gamificação**. Usuários aprendem receitas e técnicas culinárias de forma divertida e interativa, acumulando progresso conforme completam lições.
+
+<p align="right">
+<img src="https://img.shields.io/badge/status-finalizado-blue"> <img src="https://img.shields.io/badge/license-MIT-green"> <img src="https://img.shields.io/github/stars/miaeo?style=social">
+</p>
+
+---
 
 ## Instalação Local
 ### Pré-requisitos
